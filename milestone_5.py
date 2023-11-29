@@ -27,7 +27,7 @@ class Hangman:
 
     def ask_for_input(self):
          # Asks for a letter and checks if it is a valid input, and adds the guess to the list of guesses
-            guess = input("Choose a letter:")
+            guess = input("Choose a letter: ")
             if not (len(guess) == 1 and guess.isalpha()):
                 print("Invalid choice. Please enter a single alphabetic character.")
             elif guess in self.list_of_guesses:
@@ -39,14 +39,30 @@ class Hangman:
 
 
 def play_game(word_list):
-    num_lives = 5
-    game = Hangman(word_list, num_lives)
     while True:
-        if game.num_lives == 0:
-            print(f"Unlucky, the word was '{game.word}'. You lose, good day sir!")
-            break
-        elif game.num_letters > 0:
-            game.ask_for_input()
-        else:
-            print(f"Congratulations. The word was '{game.word}'. You won the game!")
-            break
+        num_lives = 5
+        game = Hangman(word_list, num_lives)
+        while True:
+            if game.num_lives == 0:
+                print(f"Unlucky, the word was '{game.word}'. You lose, good day sir!")
+                break
+            elif game.num_letters > 0:
+                game.ask_for_input()
+            else:
+                print(f"Congratulations. The word was '{game.word}'. You won the game!")
+                break
+        play_again = False
+        while not play_again:
+            answer = input("Would you like to play again? Enter Y or N: ")
+            if answer.lower() == "y":
+                play_again = True
+            elif answer.lower() == "n":
+                return False
+            else:
+                print("You did not select Y or N")
+
+
+
+
+
+play_game(["python", "jumble", "easy", "difficult", "answer", "xylophone"])
